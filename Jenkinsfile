@@ -35,7 +35,7 @@ node{
     stage('Build image') { 
         app = docker.build('payara/server-full')
     }
-    stage('Deliver') { 
+    stage('Payara run') { 
         docker.image('payara/server-full').withRun('-p 8080:8080 -p 4848:4848 -v ~/payaradocker:/opt/payara/deployments')
     }
 }
