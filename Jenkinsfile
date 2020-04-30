@@ -21,10 +21,17 @@ pipeline {
                 }
             }
         }
+        stage('Deliver') { 
+            steps {
+                sh './jenkins/scripts/deliver.sh' 
+            }
+        }
     }
 }
 node{
     def app
+    def NAME
+    def VERSION
     stage('Build image') { 
         app = docker.build('payara/server-full')
     }
