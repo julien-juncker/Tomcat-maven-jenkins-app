@@ -13,8 +13,8 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package' 
                 sh 'mvn test'
                 sh 'mvn jar:jar install:install help:evaluate -Dexpression=project.name'
-                NAME = sh 'mvn help:evaluate -Dexpression=project.name | grep "^[^\\[]"'
-                VERSION = sh 'mvn help:evaluate -Dexpression=project.version | grep "^[^\\[]"'
+                NAME = sh (script: 'mvn help:evaluate -Dexpression=project.name | grep "^[^\\[]"', returnStdout: true).trim()
+                VERSION = sh (script: 'mvn help:evaluate -Dexpression=project.version | grep "^[^\\[]"', returnStdout: true).trim()
             }
             post {
                 always {
