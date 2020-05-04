@@ -12,6 +12,9 @@ pipeline {
             steps {
                 sh 'mvn -B -DskipTests clean package' 
                 sh 'mvn test'
+                sh 'mvn jar:jar install:install help:evaluate -Dexpression=project.name'
+                NAME = sh 'mvn help:evaluate -Dexpression=project.name | grep "^[^\[]"'
+                VERSION = sh 'mvn help:evaluate -Dexpression=project.version | grep "^[^\[]"'
             }
             post {
                 always {
