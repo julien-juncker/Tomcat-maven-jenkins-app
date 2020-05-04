@@ -13,7 +13,7 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package' 
                 sh 'mvn test'
                 sh 'mvn jar:jar install:install help:evaluate -Dexpression=project.name'
-                sh './jenkins/scripts/cp_jar.sh' 
+                sh './jenkins/scripts/deliver.sh' 
             }
             post {
                 always {
