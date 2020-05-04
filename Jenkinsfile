@@ -44,7 +44,3 @@ pipeline {
         }
     }
 }
-
-node {
-    docker.image('payara/server-full').run()
-}
