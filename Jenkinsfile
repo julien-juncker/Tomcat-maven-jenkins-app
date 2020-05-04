@@ -13,8 +13,7 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package' 
                 sh 'mvn test'
                 sh 'mvn jar:jar install:install help:evaluate -Dexpression=project.name'
-                sh (script: 'mvn help:evaluate -Dexpression=project.name | grep "^[^\\[]"', returnStdout: true).trim()
-                sh (script: 'mvn help:evaluate -Dexpression=project.version | grep "^[^\\[]"', returnStdout: true).trim()
+                sh './jenkins/scripts/cp_jar.sh' 
             }
             post {
                 always {
