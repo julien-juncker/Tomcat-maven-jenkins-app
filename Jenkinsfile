@@ -13,9 +13,11 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package' 
                 sh 'mvn test'
                 sh 'mvn jar:jar install:install help:evaluate -Dexpression=project.name'
-                def NAME = sh (script: 'mvn help:evaluate -Dexpression=project.name | grep "^[^\\[]"', returnStdout: true).trim()
-                def VERSION = sh (script: 'mvn help:evaluate -Dexpression=project.version | grep "^[^\\[]"', returnStdout: true).trim()
             }
+
+            def NAME = sh (script: 'mvn help:evaluate -Dexpression=project.name | grep "^[^\\[]"', returnStdout: true).trim()
+            def VERSION = sh (script: 'mvn help:evaluate -Dexpression=project.version | grep "^[^\\[]"', returnStdout: true).trim()
+            
             post {
                 always {
                     junit 'target/surefire-reports/*.xml'
