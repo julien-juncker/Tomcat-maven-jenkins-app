@@ -29,7 +29,7 @@ pipeline {
             steps {
                 echo "build Payara"
                 script {
-                    dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}",  '-f ./Docker .')
+                    dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}",  '-f ./Docker/ .')
                     pipelineContext.dockerImage = dockerImage
                 }
             }
