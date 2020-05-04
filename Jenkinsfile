@@ -36,7 +36,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}")
+                    dockerImage = docker.build('payara/server-full')
                     pipelineContext.dockerImage = dockerImage
                 }
             }
