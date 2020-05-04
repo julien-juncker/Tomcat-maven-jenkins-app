@@ -1,19 +1,14 @@
 def pipelineContext = [:]
 
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
-        }
-    }
-
-    environment {
-        DOCKER_IMAGE_TAG = "payara/server-full:build-${env.BUILD_ID}"
-    }
+    agent none
 
     stages {
         stage('Build') { 
+            docker {
+                image 'maven:3-alpine' 
+                args '-v /root/.m2:/root/.m2' 
+            }
             steps {
                 sh 'mvn -B -DskipTests clean package' 
             }
@@ -34,20 +29,11 @@ pipeline {
             }
         }
         stage('Build image') {
-            steps {
-                script {
-                    dockerImage = docker.build('payara/server-full',  '-f ./Dockerfile .')
-                    pipelineContext.dockerImage = dockerImage
-                }
+            docker {
+                image 'payara/server-full' 
+                args '-p 8080:8080 -p 4848:4848 -v ~/payaradocker:/opt/payara/deployments' 
             }
-        }
-        stage('Run') {
-            steps {
-                echo "Run docker image"
-                script {
-                    pipelineContext.dockerContainer = pipelineContext.dockerImage.run('-p 8080:8080 -p 4848:4848 -v ~/payaradocker:/opt/payara/deployments')
-                }
-            }
+
         }
     }
 }
