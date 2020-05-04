@@ -1,3 +1,5 @@
+def pipelineContext = [:]
+
 pipeline {
     agent none
 
