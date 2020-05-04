@@ -1,6 +1,10 @@
 pipeline {
     agent none
 
+    environment {
+        DOCKER_IMAGE_TAG = "my-app:build-${env.BUILD_ID}"
+    }
+
     stages {
         stage('Test Maven') {
             agent {         
@@ -22,10 +26,25 @@ pipeline {
             }
         }
         stage('Build Payara') {
-            agent { dockerfile true }
             steps {
-                sh 'echo build Payara'
+                echo "build Payara"
+                script {
+                    dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}",  '-f ./Docker .')
+                    pipelineContext.dockerImage = dockerImage
+                }
+            }
+        }
+        stage('Run') {
+            steps {
+                echo "Run docker image"
+                script {
+                    pipelineContext.dockerContainer = pipelineContext.dockerImage.run()
+                }
             }
         }
     }
+}
+
+node {
+    docker.image('payara/server-full').run()
 }
