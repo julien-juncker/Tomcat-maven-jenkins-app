@@ -1,10 +1,20 @@
 pipeline {
-    agent {
-        dockerfile true 
-    }
+    agent none
 
     stages {
-        stage('Build image') {
+        stage('Build Maven') {
+            agent {         
+                docker {
+                image 'maven:3-alpine' 
+                args '-v /root/.m2:/root/.m2' 
+                } 
+            }
+            steps {
+                sh 'mvn -B -DskipTests clean package' 
+            }
+        }
+        stage('Build Payara') {
+            agent { dockerfile true }
             steps {
                 sh 'echo build Payara'
             }
