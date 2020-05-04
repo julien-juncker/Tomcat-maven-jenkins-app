@@ -9,7 +9,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_IMAGE_TAG = "payara/server-full"
+        DOCKER_IMAGE_TAG = "payara/server-full:build-${env.BUILD_ID}"
     }
 
     stages {
