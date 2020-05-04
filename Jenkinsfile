@@ -30,7 +30,7 @@ pipeline {
         stage('Build image') {
             agent {
                 docker {
-                    image 'payara/server-full' 
+                    image 'payara/server-full:5.184' 
                     args '-p 8080:8080 -p 4848:4848 -v ~/payaradocker:/opt/payara/deployments' 
                 }
             }
