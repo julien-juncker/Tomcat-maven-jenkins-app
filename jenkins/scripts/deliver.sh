@@ -21,7 +21,11 @@ VERSION=`mvn help:evaluate -Dexpression=project.version | grep "^[^\[]"`
 set +x
 
 set -x
-cp target/$NAME-$VERSION.jar /home/julien_juncker
+java -jar target/${NAME}-${VERSION}.jar
+set +x
+
+set -x
+cp target/$NAME-$VERSION.jar /home/
 set +x
 
 
