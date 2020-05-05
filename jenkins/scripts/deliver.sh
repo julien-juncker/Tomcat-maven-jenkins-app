@@ -29,10 +29,9 @@ java -jar target/${NAME}-${VERSION}.jar
 set +x
 
 set -x
-cd /var/jenkins_home
+cd ..
 set +x
 
 set -x
 pwd
 set +x
-
