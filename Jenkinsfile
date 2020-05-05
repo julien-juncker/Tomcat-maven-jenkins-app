@@ -27,22 +27,5 @@ pipeline {
                 }
             }
         }
-        stage('Build Payara') {
-            steps {
-                echo "build Payara"
-                script {
-                    dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}")
-                    pipelineContext.dockerImage = dockerImage
-                }
-            }
-        }
-        stage('Run') {
-            steps {
-                echo "Run docker image"
-                script {
-                    pipelineContext.dockerContainer = pipelineContext.dockerImage.run('-p 80:80 -p 4848:4848 -v ~/payaradocker:/opt/payara/deployments')
-                }
-            }
-        }
     }
 }
