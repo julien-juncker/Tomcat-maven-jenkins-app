@@ -19,15 +19,3 @@ echo 'extracts the value of the <version/> element within <project/> instead.'
 set -x
 VERSION=`mvn help:evaluate -Dexpression=project.version | grep "^[^\[]"`
 set +x
-
-set -x
-pwd
-set +x
-
-set -x
-java -jar target/${NAME}-${VERSION}.jar
-set +x
-
-set -x
-cp target/$NAME-$VERSION.jar /run
-set +x
