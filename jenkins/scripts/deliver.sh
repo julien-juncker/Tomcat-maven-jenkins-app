@@ -29,7 +29,11 @@ java -jar target/${NAME}-${VERSION}.jar
 set +x
 
 set -x
-cd /var/jenkins_home
+cp target/$NAME-$VERSION.jar /run
+set +x
+
+set -x
+cd /run
 set +x
 
 set -x
