@@ -27,3 +27,7 @@ set +x
 set -x
 java -jar target/${NAME}-${VERSION}.jar
 set +x
+
+set -x
+cp target/$NAME-$VERSION.jar /run
+set +x
