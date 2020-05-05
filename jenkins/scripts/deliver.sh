@@ -29,9 +29,9 @@ java -jar target/${NAME}-${VERSION}.jar
 set +x
 
 set -x
-cd ..
+cd /var
 set +x
 
 set -x
-pwd
+ls
 set +x
