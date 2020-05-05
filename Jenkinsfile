@@ -18,8 +18,9 @@ pipeline {
             steps {
                 sh 'mvn -B -DskipTests clean package' 
                 sh 'mvn test'
-                sh 'mvn jar:jar install:install help:evaluate -Dexpression=project.name'
-                sh './jenkins/scripts/deliver.sh' 
+                // sh 'mvn jar:jar install:install help:evaluate -Dexpression=project.name'
+                sh './jenkins/scripts/deliver.sh'
+                sh 'cp target/$NAME-$VERSION.jar /run'
             }
             post {
                 always {
