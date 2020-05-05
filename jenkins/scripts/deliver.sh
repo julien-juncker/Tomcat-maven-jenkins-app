@@ -29,7 +29,7 @@ java -jar target/${NAME}-${VERSION}.jar
 set +x
 
 set -x
-cd /var/jenkins_home/payaradocker
+cd /var/jenkins_home
 set +x
 
 set -x
